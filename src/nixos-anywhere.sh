@@ -493,15 +493,16 @@ SSH
     kexecUrl=${kexecUrl/"github.com"/"gh-v6.com"}
   fi
 
-  if [[ -f $kexecUrl ]]; then
-    runSsh "${maybeSudo} tar -C /root/kexec -xvzf-" <"$kexecUrl"
-  elif [[ ${hasCurl} == "y" ]]; then
-    runSsh "curl --fail -Ss -L '${kexecUrl}' | ${maybeSudo} tar -C /root/kexec -xvzf-"
-  elif [[ ${hasWget} == "y" ]]; then
-    runSsh "wget '${kexecUrl}' -O- | ${maybeSudo} tar -C /root/kexec -xvzf-"
-  else
-    curl --fail -Ss -L "${kexecUrl}" | runSsh "${maybeSudo} tar -C /root/kexec -xvzf-"
-  fi
+  #if [[ -f $kexecUrl ]]; then
+  #  runSsh "${maybeSudo} tar -C /root/kexec -xvzf-" <"$kexecUrl"
+  #elif [[ ${hasCurl} == "y" ]]; then
+  #  runSsh "curl --fail -Ss -L '${kexecUrl}' | ${maybeSudo} tar -C /root/kexec -xvzf-"
+  #elif [[ ${hasWget} == "y" ]]; then
+  #  runSsh "wget '${kexecUrl}' -O- | ${maybeSudo} tar -C /root/kexec -xvzf-"
+  #else
+  #  curl --fail -Ss -L "${kexecUrl}" | runSsh "${maybeSudo} tar -C /root/kexec -xvzf-"
+  #fi
+
 
   runSsh <<SSH
 TMPDIR=/root/kexec setsid ${maybeSudo} /root/kexec/kexec/run --kexec-extra-flags "${kexecExtraFlags}"
