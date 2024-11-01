@@ -484,24 +484,13 @@ runKexec() {
   step Switching system into kexec
   runSsh sh <<SSH
 set -efu ${enableDebug}
-#$maybeSudo rm -rf /root/kexec
-#$maybeSudo mkdir -p /root/kexec
+
 SSH
 
   # no way to reach global ipv4 destinations, use gh-v6.com automatically if github url
   if [[ ${hasIpv6Only} == "y" ]] && [[ $kexecUrl == "https://github.com/"* ]]; then
     kexecUrl=${kexecUrl/"github.com"/"gh-v6.com"}
   fi
-
-  #if [[ -f $kexecUrl ]]; then
-  #  runSsh "${maybeSudo} tar -C /root/kexec -xvzf-" <"$kexecUrl"
-  #elif [[ ${hasCurl} == "y" ]]; then
-  #  runSsh "curl --fail -Ss -L '${kexecUrl}' | ${maybeSudo} tar -C /root/kexec -xvzf-"
-  #elif [[ ${hasWget} == "y" ]]; then
-  #  runSsh "wget '${kexecUrl}' -O- | ${maybeSudo} tar -C /root/kexec -xvzf-"
-  #else
-  #  curl --fail -Ss -L "${kexecUrl}" | runSsh "${maybeSudo} tar -C /root/kexec -xvzf-"
-  #fi
 
 
   runSsh <<SSH
