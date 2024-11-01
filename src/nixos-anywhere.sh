@@ -484,8 +484,8 @@ runKexec() {
   step Switching system into kexec
   runSsh sh <<SSH
 set -efu ${enableDebug}
-$maybeSudo rm -rf /root/kexec
-$maybeSudo mkdir -p /root/kexec
+#$maybeSudo rm -rf /root/kexec
+#$maybeSudo mkdir -p /root/kexec
 SSH
 
   # no way to reach global ipv4 destinations, use gh-v6.com automatically if github url
